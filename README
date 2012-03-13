@@ -8,6 +8,10 @@ Kivabeta
 
 Kivabeta is a project that adds new and more powerful searching and lending features on top of the Kiva API. It is modeled after the great work done by Paul Ericksen on KivaLens (http://kivalens.org) however that was done in Silverlight and this is done in pure HTML/Javascript.
 
+Installation
+-------------
+Clone this repository into a web-accessible directory that supports HTML and javascript. Then navigate to that directory (e.g., http://localhost/kivabank/index.html )
+
 How does this help Kiva
 -----------------------
 
