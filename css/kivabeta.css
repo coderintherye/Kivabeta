@@ -1,3 +1,7 @@
 .loan-display {
 	list-style-type:none;
 }
+
+.loan-display li:nth-child(2n+1) {
+	background-color:#F7F7F2;
+} 
