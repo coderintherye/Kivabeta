@@ -15,7 +15,7 @@ Clone this repository into a web-accessible directory that supports HTML and jav
 How does this help Kiva
 -----------------------
 
-Kiva has many requests for new features that would make lending on the site easier or more engaging. Unfortunately, we don't often have time to implement such features. Also, unofortunately, we don't have much of our code open-sourced yet. This leaves us unable to enable people to help us in the ways they would like to (and that we would love). Kivabeta gives us a chance to put some code out there that can go live at kivabeta.org/lite and if it proves useful, can be merged back into our code base. In addition to making the site better, this should help us work towards open sourcing more of our code.
+Kiva has many requests for new features that would make lending on the site easier or more engaging. Unfortunately, we don't often have time to implement such features. Also, unfortunately, we don't have much of our code open-sourced yet. This leaves us unable to enable people to help us in the ways they would like to (and that we would love). Kivabeta gives us a chance to put some code out there that can go live at kivabank.org/lite and if it proves useful, can be merged back into our code base. In addition to making the site better, this should help us work towards open sourcing more of our code.
 
 Kiva engineers highly appreciate all the help. For more information on working with the Kiva API for your own projects, check out http://build.kiva.org 
 
