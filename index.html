@@ -8,9 +8,11 @@
 <link type="text/css" href="./css/kivabeta.css" rel="stylesheet">
 <link type="text/css" href="http://www.kiva.org/StyleSheets/kiva.supercat.css" rel="stylesheet">
 <script type="text/javascript" src="./js/JSLINQ.js"></script>
-<script type="text/javascript" src="./js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script type="text/javascript" src="./js/jquery-ui-1.8.2.custom.min.js"></script>
 <script type="text/javascript" src="./js/jquery.layout.min-1.2.0.js"></script>    
+<script type="text/javascript" src="./js/jquery.cookies.2.2.0.js"></script> 
+<script type="text/javascript" src="./js/json2.js"></script>
 <script type="text/javascript" src="./js/bootstrap.js"></script>    
 <script type="text/javascript">
 
@@ -26,12 +28,31 @@ function onError(tx, error) {
     addLog(error.message);
 }
 
+function saveFilter(){
+	//save to cookie
+	var searchName = jQuery('#searchNameBox').val().toUpperCase();
+	var searchSector = jQuery('#searchSectorBox').val().toUpperCase();
+	var searchCountry = jQuery('#searchCountryBox').val().toUpperCase();
+	var searchActivity = jQuery('#searchActivityBox').val().toUpperCase();
+
+	var filterObject = {}; // New object
+	filterObject['searchName'] = searchName;
+	filterObject['searchSector'] = searchSector;
+	filterObject['searchCountry'] = searchCountry;
+	filterObject['searchActivity'] = searchActivity;
+
+	var jsonFilter = JSON.stringify(filterObject, null, 2);
+	alert(jsonFilter);
+	return false;
+}
+
 var loans = new Array();
 var totalPages = 0;
 var pagesRemaining = 0;
 var jslloans;
 
 jQuery(document).ready( function() {
+	$('#saveFilterBtn').click(saveFilter);
 });
 
 function testStrCommaDelim(objvalue, str)
@@ -133,6 +154,8 @@ jQuery.getJSON("jsonloans.json", null, receiveKBFile);
             		Sector: <input type="text" id="searchSectorBox" onkeyup="performSearch();" style="width:125px;"><br>
             		Activity: <input type="text" id="searchActivityBox" onkeyup="performSearch();" style="width:125px;"><br>
 				</span>
+			</br>
+				<a class="btn" id="saveFilterBtn" href="#">Save Filter</a>
 			</div>
 			<div class="pB">
 				<h3 class=""><span class=""></span><a href="/#">Saved Filters</a></h3>
