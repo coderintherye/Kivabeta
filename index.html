@@ -28,6 +28,7 @@ function onError(tx, error) {
     addLog(error.message);
 }
 
+
 function saveFilter(){
 	//save to cookie
 	var searchName = jQuery('#searchNameBox').val().toUpperCase();
@@ -56,6 +57,20 @@ function saveFilter(){
 	return false;
 }
 
+function applyFilter(id){
+	alert("hi");
+	var allFilters = $.cookies.get("filter");
+
+	if(allFilters[id]) {
+		// there is a filter... apply it
+		jQuery('#searchNameBox').val(allFilters[id].searchName);
+		jQuery('#searchSectorBox').val(allFilters[id].searchSector);
+		jQuery('#searchCountryBox').val(allFilters[id].searchCountry);
+		jQuery('#searchActivityBox').val(allFilters[id].searchActivity);
+	}
+	return false;
+}
+
 var loans = new Array();
 var totalPages = 0;
 var pagesRemaining = 0;
@@ -63,6 +78,9 @@ var jslloans;
 
 jQuery(document).ready( function() {
 	$('#saveFilterBtn').click(saveFilter);
+	$("#filterBtn1").click(function() {
+  		applyFilter(1);
+	});
 	$('#filterBtn1').hide();
 	$('#filterBtn2').hide();
 	$('#filterBtn3').hide();
