@@ -41,8 +41,18 @@ function saveFilter(){
 	filterObject['searchCountry'] = searchCountry;
 	filterObject['searchActivity'] = searchActivity;
 
-	var jsonFilter = JSON.stringify(filterObject, null, 2);
+	var allFilters=new Array();
+	allFilters[0] = filterObject;
+	allFilters[1] = filterObject;
+
+	var jsonFilter = JSON.stringify(allFilters, null, 2);
 	alert(jsonFilter);
+	$.cookies.set("filter", jsonFilter);
+	var returned =  $.cookies.get("filter");
+
+	$('#filterBtn1').text(returned[0].searchName);
+	$('#filterBtn1').show();
+
 	return false;
 }
 
@@ -53,6 +63,11 @@ var jslloans;
 
 jQuery(document).ready( function() {
 	$('#saveFilterBtn').click(saveFilter);
+	$('#filterBtn1').hide();
+	$('#filterBtn2').hide();
+	$('#filterBtn3').hide();
+	$('#filterBtn4').hide();
+	//loadFilters();
 });
 
 function testStrCommaDelim(objvalue, str)
@@ -160,7 +175,11 @@ jQuery.getJSON("jsonloans.json", null, receiveKBFile);
 			<div class="pB">
 				<h3 class=""><span class=""></span><a href="/#">Saved Filters</a></h3>
 				<div class="">
-					<p>Add ability to save search filters</p>
+				</br>
+					<a href="#" id="filterBtn1" class="btn btn-mini" style="width:80%"></a></br>
+					<a href="#" id="filterBtn2" class="btn btn-mini" style="width:80%"></a></br>
+					<a href="#" id="filterBtn3" class="btn btn-mini" style="width:80%"></a></br>
+					<a href="#" id="filterBtn4" class="btn btn-mini" style="width:80%"></a></br>
 				</div>
 			</div>
 			<div class="pB">
