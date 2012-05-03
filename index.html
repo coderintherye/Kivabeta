@@ -47,7 +47,7 @@ function saveFilter(){
 	allFilters[1] = filterObject;
 
 	var jsonFilter = JSON.stringify(allFilters, null, 2);
-	alert(jsonFilter);
+
 	$.cookies.set("filter", jsonFilter);
 	var returned =  $.cookies.get("filter");
 
@@ -58,7 +58,6 @@ function saveFilter(){
 }
 
 function applyFilter(id){
-	alert("hi");
 	var allFilters = $.cookies.get("filter");
 
 	if(allFilters[id]) {
@@ -67,6 +66,8 @@ function applyFilter(id){
 		jQuery('#searchSectorBox').val(allFilters[id].searchSector);
 		jQuery('#searchCountryBox').val(allFilters[id].searchCountry);
 		jQuery('#searchActivityBox').val(allFilters[id].searchActivity);
+		
+		performSearch();
 	}
 	return false;
 }
