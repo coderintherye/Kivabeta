@@ -51,7 +51,7 @@ function saveFilter(){
 	$.cookies.set("filter", jsonFilter);
 	var returned =  $.cookies.get("filter");
 
-	$('#filterBtn1').text(returned[0].searchName);
+	$('#filterBtn1').text(filterLabel(returned[0]));
 	$('#filterBtn1').show();
 
 	return false;
@@ -69,6 +69,20 @@ function applyFilter(id){
 		jQuery('#searchActivityBox').val(allFilters[id].searchActivity);
 	}
 	return false;
+}
+
+function filterLabel(filter){
+	var label = "Filter: ";
+	if (filter.searchName) {
+		label = label + filter.searchName;
+	}else if(filter.searchSector) {
+		label = label + filter.searchSector;
+	}else if (filter.searchCountry) {
+		label = label + filter.searchCountry;
+	}else if (filter.searchActivity) {
+		label = label + filter.searchActivity;
+	}
+	return label;
 }
 
 var loans = new Array();
