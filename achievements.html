@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>KivaBeta</title>
+<link type="text/css" href="./js/jquery-ui-1.8.2.custom.css" rel="stylesheet">
+<link type="text/css" href="./css/bootstrap.css" rel="stylesheet">
+<link type="text/css" href="./css/kivabeta.css" rel="stylesheet">
+<link type="text/css" href="http://www.kiva.org/StyleSheets/kiva.supercat.css" rel="stylesheet">
+<script type="text/javascript" src="./js/JSLINQ.js"></script>
+<script type="text/javascript" src="./js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="./js/jquery-ui-1.8.2.custom.min.js"></script>
+<script type="text/javascript" src="./js/jquery.layout.min-1.2.0.js"></script>    
+<script type="text/javascript" src="./js/bootstrap.js"></script>    
+<script type="text/javascript" src="./js/achievements.js"></script>
+<script type="text/javascript">
+
+jQuery(window).load( function() {
+});
+
+
+var achievementMap = { "hasMadeALoan" : ACH.HasMadeALoan ,
+					  "hasMadeFiveLoans" : ACH.HasMadeFiveLoans,
+					  "hasMadeFiftyLoans" : ACH.HasMadeFiftyLoans,
+					  "globetrotter" : ACH.Globetrotter
+					};
+
+function ActivateAchievement(achievement)
+{
+	jQuery("#" + achievement).text("Yes");
+	jQuery("#" + achievement).removeClass("achievement-notactive");
+	jQuery("#" + achievement).addClass("achievement-active");
+}
+
+function DeactivateAchievement(achievement)
+{
+	jQuery("#" + achievement).text("No");
+	jQuery("#" + achievement).removeClass("achievement-active");
+	jQuery("#" + achievement).addClass("achievement-notactive");
+}
+
+function UpdateAchievements()
+{
+	for (var achievement in achievementMap)
+	{
+		if (achievementMap[achievement]())
+		{
+			ActivateAchievement(achievement);
+		}
+		else
+		{
+			DeactivateAchievement(achievement);	
+		}
+	}
+}
+
+var usrName = "";
+
+function GetUserData()
+{
+	var curUsrName = jQuery('#userNameBox').val();
+	if (curUsrName !== usrName)
+	{
+		usrName = curUsrName;
+		ACH.LoadData(curUsrName, UpdateAchievements, 1, true);
+	}
+}
+
+
+</script>
+</head>
+<body >
+<div class="container">
+	<div class="row">
+		<h1 class="pageHeader">KivaBeta</h1>
+	</div>
+	<div class="row">
+		<div class="b rC bS">
+			<h3 class="pT pB">Achievements</h3>
+			<div>
+				Kiva account name: <input type="text" id="userNameBox" onkeyup="GetUserData();" style="width:125px;">
+			</div>
+			<p class="">
+        		<span id="results" tabindex="0">
+        			<div>Has made a loan: <span id="hasMadeALoan" class="achievement-notactive">No</span></div>
+        			<div>Has made 5 loans: <span id="hasMadeFiveLoans" class="achievement-notactive">No</span></div>
+        			<div>Has made 50 loans: <span id="hasMadeFiftyLoans" class="achievement-notactive">No</span></div>
+        			<div>Has made a loan in 10 different countries: <span id="globetrotter" class="achievement-notactive">No</span></div>
+        		</span>
+       			<span id="log"></span>
+			</p>
+		</div>
+	</div>
+	<div class="row" >
+		<div class="span3"><p>(C) 2012 Kiva</p></div>
+	</div>
+</div> 
+</body>
+</html>

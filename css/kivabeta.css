@@ -5,3 +5,11 @@
 .loan-display li:nth-child(2n+1) {
 	background-color:#F7F7F2;
 } 
+
+.achievement-active {
+	color : green;
+}
+
+.achievement-notactive {
+	color : red;
+}
