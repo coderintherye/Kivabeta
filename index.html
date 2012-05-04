@@ -8,9 +8,11 @@
 <link type="text/css" href="./css/kivabeta.css" rel="stylesheet">
 <link type="text/css" href="http://www.kiva.org/StyleSheets/kiva.supercat.css" rel="stylesheet">
 <script type="text/javascript" src="./js/JSLINQ.js"></script>
-<script type="text/javascript" src="./js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script type="text/javascript" src="./js/jquery-ui-1.8.2.custom.min.js"></script>
 <script type="text/javascript" src="./js/jquery.layout.min-1.2.0.js"></script>    
+<script type="text/javascript" src="./js/jquery.cookies.2.2.0.js"></script> 
+<script type="text/javascript" src="./js/json2.js"></script>
 <script type="text/javascript" src="./js/bootstrap.js"></script>    
 <script type="text/javascript">
 
@@ -26,12 +28,79 @@ function onError(tx, error) {
     addLog(error.message);
 }
 
+
+function saveFilter(){
+	//save to cookie
+	var searchName = jQuery('#searchNameBox').val().toUpperCase();
+	var searchSector = jQuery('#searchSectorBox').val().toUpperCase();
+	var searchCountry = jQuery('#searchCountryBox').val().toUpperCase();
+	var searchActivity = jQuery('#searchActivityBox').val().toUpperCase();
+
+	var filterObject = {}; // New object
+	filterObject['searchName'] = searchName;
+	filterObject['searchSector'] = searchSector;
+	filterObject['searchCountry'] = searchCountry;
+	filterObject['searchActivity'] = searchActivity;
+
+	var allFilters=new Array();
+	allFilters[0] = filterObject;
+	allFilters[1] = filterObject;
+
+	var jsonFilter = JSON.stringify(allFilters, null, 2);
+
+	$.cookies.set("filter", jsonFilter);
+	var returned =  $.cookies.get("filter");
+
+	$('#filterBtn1').text(filterLabel(returned[0]));
+	$('#filterBtn1').show();
+
+	return false;
+}
+
+function applyFilter(id){
+	var allFilters = $.cookies.get("filter");
+
+	if(allFilters[id]) {
+		// there is a filter... apply it
+		jQuery('#searchNameBox').val(allFilters[id].searchName);
+		jQuery('#searchSectorBox').val(allFilters[id].searchSector);
+		jQuery('#searchCountryBox').val(allFilters[id].searchCountry);
+		jQuery('#searchActivityBox').val(allFilters[id].searchActivity);
+		
+		performSearch();
+	}
+	return false;
+}
+
+function filterLabel(filter){
+	var label = "Filter: ";
+	if (filter.searchName) {
+		label = label + filter.searchName;
+	}else if(filter.searchSector) {
+		label = label + filter.searchSector;
+	}else if (filter.searchCountry) {
+		label = label + filter.searchCountry;
+	}else if (filter.searchActivity) {
+		label = label + filter.searchActivity;
+	}
+	return label;
+}
+
 var loans = new Array();
 var totalPages = 0;
 var pagesRemaining = 0;
 var jslloans;
 
 jQuery(document).ready( function() {
+	$('#saveFilterBtn').click(saveFilter);
+	$("#filterBtn1").click(function() {
+  		applyFilter(1);
+	});
+	$('#filterBtn1').hide();
+	$('#filterBtn2').hide();
+	$('#filterBtn3').hide();
+	$('#filterBtn4').hide();
+	//loadFilters();
 });
 
 function testStrCommaDelim(objvalue, str)
@@ -133,11 +202,17 @@ jQuery.getJSON("jsonloans.json", null, receiveKBFile);
             		Sector: <input type="text" id="searchSectorBox" onkeyup="performSearch();" style="width:125px;"><br>
             		Activity: <input type="text" id="searchActivityBox" onkeyup="performSearch();" style="width:125px;"><br>
 				</span>
+			</br>
+				<a class="btn" id="saveFilterBtn" href="#">Save Filter</a>
 			</div>
 			<div class="pB">
 				<h3 class=""><span class=""></span><a href="/#">Saved Filters</a></h3>
 				<div class="">
-					<p>Add ability to save search filters</p>
+				</br>
+					<a href="#" id="filterBtn1" class="btn btn-mini" style="width:80%"></a></br>
+					<a href="#" id="filterBtn2" class="btn btn-mini" style="width:80%"></a></br>
+					<a href="#" id="filterBtn3" class="btn btn-mini" style="width:80%"></a></br>
+					<a href="#" id="filterBtn4" class="btn btn-mini" style="width:80%"></a></br>
 				</div>
 			</div>
 			<div class="pB">
