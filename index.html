@@ -42,17 +42,19 @@ function saveFilter(){
 	filterObject['searchCountry'] = searchCountry;
 	filterObject['searchActivity'] = searchActivity;
 
-	var allFilters=new Array();
-	allFilters[0] = filterObject;
-	allFilters[1] = filterObject;
+	var allFilters = $.cookies.get("filter");
+	if (allFilters) {
+		allFilters[allFilters.length] = filterObject;
+	}else{
+		allFilters[0] = filterObject;
+		var jsonFilter = JSON.stringify(allFilters, null, 2);
+		$.cookies.set("filter", jsonFilter);
+	}
 
-	var jsonFilter = JSON.stringify(allFilters, null, 2);
-
+    var jsonFilter = JSON.stringify(allFilters, null, 2);
 	$.cookies.set("filter", jsonFilter);
-	var returned =  $.cookies.get("filter");
 
-	$('#filterBtn1').text(filterLabel(returned[0]));
-	$('#filterBtn1').show();
+	loadFilters();
 
 	return false;
 }
@@ -66,7 +68,7 @@ function applyFilter(id){
 		jQuery('#searchSectorBox').val(allFilters[id].searchSector);
 		jQuery('#searchCountryBox').val(allFilters[id].searchCountry);
 		jQuery('#searchActivityBox').val(allFilters[id].searchActivity);
-		
+
 		performSearch();
 	}
 	return false;
@@ -86,6 +88,18 @@ function filterLabel(filter){
 	return label;
 }
 
+function loadFilters(){
+	var allFilters = $.cookies.get("filter");
+
+	if (allFilters){
+
+		for (i=0;i<allFilters.length;i++){
+			$('#filterBtn'+i).text(filterLabel(allFilters[i]));
+			$('#filterBtn'+i).show();
+		}
+	}
+}
+
 var loans = new Array();
 var totalPages = 0;
 var pagesRemaining = 0;
@@ -96,11 +110,24 @@ jQuery(document).ready( function() {
 	$("#filterBtn1").click(function() {
   		applyFilter(1);
 	});
+	$("#filterBtn2").click(function() {
+  		applyFilter(2);
+	});
+	$("#filterBtn3").click(function() {
+  		applyFilter(4);
+	});
+	$("#filterBtn4").click(function() {
+  		applyFilter(4);
+	});
+	$("#filterBtn5").click(function() {
+  		applyFilter(5);
+	});
+	
 	$('#filterBtn1').hide();
 	$('#filterBtn2').hide();
 	$('#filterBtn3').hide();
 	$('#filterBtn4').hide();
-	//loadFilters();
+	loadFilters();
 });
 
 function testStrCommaDelim(objvalue, str)
