@@ -105,6 +105,17 @@ function loadFilters(){
 	}
 }
 
+function clearSearchSelection() {
+	jQuery('#searchNameBox').val('');
+	jQuery('#searchSectorBox').val('');
+	jQuery('#searchCountryBox').val('');
+	jQuery('#searchActivityBox').val('');
+
+	performSearch();
+
+	return false;
+}
+
 var loans = new Array();
 var totalPages = 0;
 var pagesRemaining = 0;
@@ -127,6 +138,10 @@ jQuery(document).ready( function() {
 	$("#filterBtn5").click(function() {
   		applyFilter(5);
 	});
+	$("#clearSearchBtn").click(function() {
+  		clearSearchSelection();
+	});
+	
 
 	loadFilters();
 });
@@ -231,7 +246,7 @@ jQuery.getJSON("jsonloans.json", null, receiveKBFile);
             		Activity: <input type="text" id="searchActivityBox" onkeyup="performSearch();" style="width:125px;"><br>
 				</span>
 			</br>
-				<a class="btn" id="saveFilterBtn" href="#">Save Filter</a><a class="btn" id="clearSearchBtn" href="#">Clear</a>
+				<a class="btn btn-ac" id="clearSearchBtn" href="#">Clear</a> <a class="btn btn-primary" id="saveFilterBtn" href="#">Save Filter</a>
 			</div>
 			<div class="pB">
 				<h3 class=""><span class=""></span><a href="/#">Saved Filters</a></h3>
