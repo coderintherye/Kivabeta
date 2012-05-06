@@ -41,14 +41,12 @@ function saveFilter(){
 	filterObject['searchSector'] = searchSector;
 	filterObject['searchCountry'] = searchCountry;
 	filterObject['searchActivity'] = searchActivity;
-
-	var allFilters = $.cookies.get("filter");
-	if (allFilters) {
+	var allFilters = new Array();
+	if ($.cookies.get("filter")) {
+		allFilters = $.cookies.get("filter");
 		allFilters[allFilters.length] = filterObject;
 	}else{
 		allFilters[0] = filterObject;
-		var jsonFilter = JSON.stringify(allFilters, null, 2);
-		$.cookies.set("filter", jsonFilter);
 	}
 
     var jsonFilter = JSON.stringify(allFilters, null, 2);
@@ -91,11 +89,17 @@ function filterLabel(filter){
 function loadFilters(){
 	var allFilters = $.cookies.get("filter");
 
+	$('#filterBtn1').hide();
+	$('#filterBtn2').hide();
+	$('#filterBtn3').hide();
+	$('#filterBtn4').hide();
+	$('#filterBtn5').hide();
+
 	if (allFilters){
 
 		for (i=0;i<allFilters.length;i++){
-			$('#filterBtn'+i).text(filterLabel(allFilters[i]));
-			$('#filterBtn'+i).show();
+			$('#filterBtn'+i+1).text(filterLabel(allFilters[i]));
+			$('#filterBtn'+i+1).show();
 		}
 	}
 }
@@ -114,7 +118,7 @@ jQuery(document).ready( function() {
   		applyFilter(2);
 	});
 	$("#filterBtn3").click(function() {
-  		applyFilter(4);
+  		applyFilter(3);
 	});
 	$("#filterBtn4").click(function() {
   		applyFilter(4);
@@ -122,11 +126,7 @@ jQuery(document).ready( function() {
 	$("#filterBtn5").click(function() {
   		applyFilter(5);
 	});
-	
-	$('#filterBtn1').hide();
-	$('#filterBtn2').hide();
-	$('#filterBtn3').hide();
-	$('#filterBtn4').hide();
+
 	loadFilters();
 });
 
@@ -236,10 +236,11 @@ jQuery.getJSON("jsonloans.json", null, receiveKBFile);
 				<h3 class=""><span class=""></span><a href="/#">Saved Filters</a></h3>
 				<div class="">
 				</br>
-					<a href="#" id="filterBtn1" class="btn btn-mini" style="width:80%"></a></br>
-					<a href="#" id="filterBtn2" class="btn btn-mini" style="width:80%"></a></br>
-					<a href="#" id="filterBtn3" class="btn btn-mini" style="width:80%"></a></br>
-					<a href="#" id="filterBtn4" class="btn btn-mini" style="width:80%"></a></br>
+					<a href="#" id="filterBtn1" class="btn btn-mini" style="width:60%"></a></br>
+					<a href="#" id="filterBtn2" class="btn btn-mini" style="width:60%"></a></br>
+					<a href="#" id="filterBtn3" class="btn btn-mini" style="width:60%"></a></br>
+					<a href="#" id="filterBtn4" class="btn btn-mini" style="width:60%"></a></br>
+					<a href="#" id="filterBtn5" class="btn btn-mini" style="width:60%"></a></br>
 				</div>
 			</div>
 			<div class="pB">
