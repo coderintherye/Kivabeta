@@ -58,6 +58,7 @@ function saveFilter(){
 }
 
 function applyFilter(id){
+	id = id-1;
 	var allFilters = $.cookies.get("filter");
 
 	if(allFilters[id]) {
@@ -98,8 +99,8 @@ function loadFilters(){
 	if (allFilters){
 
 		for (i=0;i<allFilters.length;i++){
-			$('#filterBtn'+i+1).text(filterLabel(allFilters[i]));
-			$('#filterBtn'+i+1).show();
+			$('#filterBtn'+(i+1)).text(filterLabel(allFilters[i]));
+			$('#filterBtn'+(i+1)).show();
 		}
 	}
 }
@@ -230,7 +231,7 @@ jQuery.getJSON("jsonloans.json", null, receiveKBFile);
             		Activity: <input type="text" id="searchActivityBox" onkeyup="performSearch();" style="width:125px;"><br>
 				</span>
 			</br>
-				<a class="btn" id="saveFilterBtn" href="#">Save Filter</a>
+				<a class="btn" id="saveFilterBtn" href="#">Save Filter</a><a class="btn" id="clearSearchBtn" href="#">Clear</a>
 			</div>
 			<div class="pB">
 				<h3 class=""><span class=""></span><a href="/#">Saved Filters</a></h3>
