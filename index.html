@@ -41,10 +41,26 @@ function saveFilter(){
 	filterObject['searchSector'] = searchSector;
 	filterObject['searchCountry'] = searchCountry;
 	filterObject['searchActivity'] = searchActivity;
+
 	var allFilters = new Array();
+
 	if ($.cookies.get("filter")) {
 		allFilters = $.cookies.get("filter");
-		allFilters[allFilters.length] = filterObject;
+
+		var newAllFilters = new Array();
+
+		newAllFilters[0] = filterObject;
+
+		// if 5 filters. delete last... going to replace it
+		if(allFilters[4]) {
+			allFilters.splice(4,4);
+		}
+
+		// Shift all filters down
+		for (i=0;i<allFilters.length;i++){
+			newAllFilters[i+1] = allFilters[i];
+		}
+		allFilters = newAllFilters;
 	}else{
 		allFilters[0] = filterObject;
 	}
@@ -254,19 +270,19 @@ jQuery.getJSON("jsonloans.json", null, receiveKBFile);
 				</br>
 					<ul class="nav nav-tabs nav-stacked" style="font-size:smaller;">
 						<li>
-   							 <a href="#" id="filterBtn1" style="padding-top:4px;padding-bottom:4px;"></a>
+   							 <a href="#" id="filterBtn1" class="filterBtn"></a>
   						</li>
   						<li>
-   							 <a href="#" id="filterBtn2" style="padding-top:4px;padding-bottom:4px;"></a>
+   							 <a href="#" id="filterBtn2" class="filterBtn"></a>
   						</li>
   						<li>
-   							 <a href="#" id="filterBtn3" style="padding-top:4px;padding-bottom:4px;"></a>
+   							 <a href="#" id="filterBtn3" class="filterBtn"></a>
   						</li>
   						<li>
-   							 <a href="#" id="filterBtn4" style="padding-top:4px;padding-bottom:4px;"></a>
+   							 <a href="#" id="filterBtn4" class="filterBtn"></a>
   						</li>
   						<li>
-   							 <a href="#" id="filterBtn5" style="padding-top:4px;padding-bottom:4px;"></a>
+   							 <a href="#" id="filterBtn5" class="filterBtn"></a>
   						</li>
 					</ul>
 				</div>

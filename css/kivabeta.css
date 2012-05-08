@@ -13,3 +13,7 @@
 .achievement-notactive {
 	color : red;
 }
+.filterBtn{
+	padding-top:4px;
+	padding-bottom:4px;
+}
