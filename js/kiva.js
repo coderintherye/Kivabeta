@@ -18,39 +18,44 @@ function saveFilter(){
 	var searchCountry = jQuery('#searchCountryBox').val().toUpperCase();
 	var searchActivity = jQuery('#searchActivityBox').val().toUpperCase();
 
-	var filterObject = {}; // New object
-	filterObject['searchName'] = searchName;
-	filterObject['searchSector'] = searchSector;
-	filterObject['searchCountry'] = searchCountry;
-	filterObject['searchActivity'] = searchActivity;
- 
-	var allFilters = new Array();
+	// any search criteria entered?
+	if (searchName || searchSector || searchCountry || searchActivity) {
 
-	if ($.cookies.get("filter")) {
-		allFilters = $.cookies.get("filter");
+		var filterObject = {}; // New object
+		filterObject['searchName'] = searchName;
+		filterObject['searchSector'] = searchSector;
+		filterObject['searchCountry'] = searchCountry;
+		filterObject['searchActivity'] = searchActivity;
+	 	
+		var allFilters = new Array();
 
-		var newAllFilters = new Array();
+		if ($.cookies.get("filter")) {
+			allFilters = $.cookies.get("filter");
 
-		newAllFilters[0] = filterObject;
+			var newAllFilters = new Array();
 
-		// if 5 filters. delete last... going to replace it
-		if(allFilters[4]) {
-			allFilters.splice(4,4);
+			newAllFilters[0] = filterObject;
+
+			// if 5 filters. delete last... going to replace it
+			if(allFilters[4]) {
+				allFilters.splice(4,4);
+			}
+
+			// Shift all filters down
+			for (i=0;i<allFilters.length;i++){
+				newAllFilters[i+1] = allFilters[i];
+			}
+			allFilters = newAllFilters;
+		}else{
+			allFilters[0] = filterObject;
 		}
 
-		// Shift all filters down
-		for (i=0;i<allFilters.length;i++){
-			newAllFilters[i+1] = allFilters[i];
-		}
-		allFilters = newAllFilters;
-	}else{
-		allFilters[0] = filterObject;
+	    var jsonFilter = JSON.stringify(allFilters, null, 2);
+		$.cookies.set("filter", jsonFilter);
+
+		loadFilters();
+
 	}
-
-    var jsonFilter = JSON.stringify(allFilters, null, 2);
-	$.cookies.set("filter", jsonFilter);
-
-	loadFilters();
 
 	return false;
 }
@@ -72,15 +77,15 @@ function applyFilter(id){
 }
 
 function filterLabel(filter){
-	var label = "Filter: ";
+	var label = "";
 	if (filter.searchName) {
-		label = label + filter.searchName;
+		label = "Name: " + filter.searchName;
 	}else if(filter.searchSector) {
-		label = label + filter.searchSector;
+		label = label + "Sector: " + filter.searchSector;
 	}else if (filter.searchCountry) {
-		label = label + filter.searchCountry;
+		label = label + "Country: " + filter.searchCountry;
 	}else if (filter.searchActivity) {
-		label = label + filter.searchActivity;
+		label = label + "Activity: " + filter.searchActivity;
 	}
 	return label;
 }
