@@ -1,0 +1,146 @@
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title>Kivabeta</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+	<style type="text/css">
+	</style>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+	<script type="text/javascript">
+	
+var loans = [];
+
+function fragmentLoan(i) {
+	var loan = loans[i];
+	return 'href="#detail" onclick="renderLoan(\''+loan.name+'\','+i+');" data-transition="slide"';
+}
+
+function renderCountries() {
+	var loan, country, countries = {}, output = [];
+	for(loan in loans) {
+		loan = loans[loan];
+		if(loan.country in countries)
+			countries[loan.country]++;
+		else
+			countries[loan.country] = 1;
+	}
+	for(country in countries)
+		output.push('<li><a onclick="render(function(){return renderCountry(\''+country+'\');});">'+country+' ('+countries[country]+')</a></li>');
+	output.sort();
+	return output.join("");
+}
+
+function renderCountry(country) {
+	var i, loan, output = [];
+	for(i in loans) {
+		loan = loans[i];
+		if(loan.country == country)
+			output.push('<li><a '+fragmentLoan(i)+'>'+loan.name+' ('+loan.sector+' '+loan.activity+')</a></li>');
+	}
+	output.sort();
+	return output.join("");
+}
+
+function renderSectors() {
+	var loan, sector, sectors = {}, output = [];
+	for(loan in loans) {
+		loan = loans[loan];
+		if(loan.sector in sectors)
+			sectors[loan.sector]++;
+		else
+			sectors[loan.sector] = 1;
+	}
+	for(sector in sectors)
+		output.push('<li><a onclick="render(function(){return renderSector(\''+sector+'\');});">'+sector+' ('+sectors[sector]+')</a></li>');
+	output.sort();
+	return output.join("");
+}
+
+function renderSector(sector) {
+	var i, loan, output = [];
+	for(i in loans) {
+		loan = loans[i];
+		if(loan.sector == sector)
+			output.push('<li><a '+fragmentLoan(i)+'>'+loan.name+' ('+loan.country+', '+loan.activity+')</a></li>');
+	}
+	output.sort();
+	return output.join("");
+}
+
+function renderAll() {
+	var i, loan, output = [];
+	for(i in loans) {
+		loan = loans[i];
+		output.push('<li><a '+fragmentLoan(i)+'>'+loan.name+' ('+loan.country+', '+loan.sector+' '+loan.activity+')</a></li>');
+	}
+	output.sort();
+	return output.join("");
+}
+
+function render(filter) {
+	jQuery("#list").html("<li>filtering...</li>");
+	jQuery("#list").listview('refresh');
+	setTimeout(function(){
+		var list;
+		if(!loans.length)
+			list = "<li>(no loans)</li>";
+		else
+			list = filter();
+		jQuery("#list").html(list);
+		jQuery("#list").listview('refresh'); //its the listview refresh that's so slow for 'all'
+	});
+}
+
+function renderLoan(name,loan) {
+	loan = loans[loan];
+	jQuery("#name").html(name);
+}
+
+function receiveKBFile(data) {
+	loans = data.Loans;
+	jQuery("#by_country").click();
+}
+
+jQuery(document).ready(function(){
+	jQuery("#by_country").click(function(){render(renderCountries);});
+	jQuery("#by_sector").click(function(){render(renderSectors);});
+	jQuery("#all").click(function(){render(renderAll);});
+});
+
+jQuery.getJSON("jsonloans.json", null, receiveKBFile);
+
+	</script>
+</head>
+
+<body> 
+
+<div id="main" data-role="page">
+	<div data-role="header">
+		<h1>Kivabeta</h1>
+		<div data-role="navbar" data-iconpos="bottom">
+			<ul>
+				<li id="by_country"><a class="ui-btn-active" href="#">by country</a></li>
+				<li id="by_sector"><a href="#" >by sector</a></li>
+				<li id="all"><a href="#">all</a></li>
+			</ul>
+		</div>
+	</div>
+	<div data-role="content">
+	
+		<ul data-role="listview" data-inset="true" data-filter="true" id="list">
+			<li>loading...</li>
+		</ul>		
+	</div>
+</div>
+
+<div id="detail" data-role="page">
+	<div data-role="content">
+		<h1 id="name"></h1>
+		<p>(details of loanee here)</p>
+	</div>
+</div>
+
+</body>
+</html>

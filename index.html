@@ -8,114 +8,13 @@
 <link type="text/css" href="./css/kivabeta.css" rel="stylesheet">
 <link type="text/css" href="http://www.kiva.org/StyleSheets/kiva.supercat.css" rel="stylesheet">
 <script type="text/javascript" src="./js/JSLINQ.js"></script>
-<script type="text/javascript" src="./js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script type="text/javascript" src="./js/jquery-ui-1.8.2.custom.min.js"></script>
 <script type="text/javascript" src="./js/jquery.layout.min-1.2.0.js"></script>    
-<script type="text/javascript" src="./js/bootstrap.js"></script>    
-<script type="text/javascript">
-
-function replaceLoading(msg){
-    jQuery("#loading").html(msg);
-}
-
-function addLog(msg){
-    jQuery("#log").html(jQuery("#log").html() + msg + '<br/>');
-}
-
-function onError(tx, error) {
-    addLog(error.message);
-}
-
-var loans = new Array();
-var totalPages = 0;
-var pagesRemaining = 0;
-var jslloans;
-
-jQuery(document).ready( function() {
-});
-
-function testStrCommaDelim(objvalue, str)
-{
-    if (str == undefined) return true;
-    if (str.trim()=="") return true;
-    var toTest = objvalue.toUpperCase();
-    var arr = str.split(",");
-    for (var i = 0; i < arr.length; i++){
-        if (arr[i].trim() == "") return false;
-        if (toTest.indexOf(arr[i]) != -1){
-            return true;
-        }
-    }
-    return false;
-}
-
-function buildCriteria(){
-    return {
-        name: function(){return jQuery('#searchNameBox').val().toUpperCase()},
-        sector: function(){return jQuery('#searchSectorBox').val().toUpperCase()},
-        country: function(){return jQuery('#searchCountryBox').val().toUpperCase()},
-        activity: function(){return jQuery('#searchActivityBox').val().toUpperCase()},
-        //partner: function(){return jQuery('#searchPartnerBox').val().toUpperCase()},
-        isMatch: function(loan){
-            try{
-                return ((testStrCommaDelim(loan.name, this.name())
-                    && (testStrCommaDelim(loan.sector,this.sector()))
-                    && (testStrCommaDelim(loan.activity, this.activity()))
-                    && (testStrCommaDelim(loan.country, this.country()))));
-                    //&& (loan.Partner.toUpperCase().indexOf(this.partner())!= -1);
-            }catch(e){
-                addLog(e.message);
-                return false;
-            }
-        }
-    }
-}
-
-function performSearch(){
-    try{
-        var crit = buildCriteria();
-        var tres = jsLoans.Where(function(aloan){ return crit.isMatch(aloan)});
-    }catch(e){
-        addLog(e.message);
-    }
-    renderResults(tres);
-}
-
-function displayTables(toOutput){
-    replaceLoading("Querying local data...");
-    jQuery('#results').html('');
-    renderResults(toOutput);
-            //'Search Partner: <input type="text" id="searchPartnerBox" onkeyup="performSearch();" >');
-}
-
-function renderResults(result) {
-    var output = "";
-    for (var i = 0, item = null; i < result.Count(); i++) {
-        item = result.items[i];
-         output +=
-                '<li id="' + item.id + '" class="loans">' + item.country + ': (' + item.sector + ": " + item.activity + ') <a href="http://www.kiva.org/lend/' + item.id + '">' + item.name + '</a></li>';
-    }
-    replaceLoading(": " + result.Count());
-    jQuery('#results').html("<ul class='loan-display'>"+output+"</ul>");
-}
-
-function receiveKBFile(data){
-    jsLoans = JSLINQ(data.Loans).OrderBy(function(item){return item.country + ":" + item.name;});
-    displayTables(jsLoans);
-	jQuery('.loans').click( function(l) {
-        var loanId = jQuery(this).attr('id');
-		jQuery('#image').show();
-		jQuery.each(data.Loans, function(i,loan) {
-			if (loanId == loan.id) {
-				jQuery('#borrower-name').html(loan.name);
-				jQuery('#borrower-image').html('<img src="http://www.kiva.org/img/w300h300/' + loan.imgID  + '.jpg" />');
-				jQuery('#loan-description').html('will use this loan ' + loan.use);
-			}
-		});
-	});
-}
-jQuery.getJSON("jsonloans.json", null, receiveKBFile);
-</script>
+<script type="text/javascript" src="./js/jquery.cookies.2.2.0.js"></script> 
+<script type="text/javascript" src="./js/json2.js"></script>
+<script type="text/javascript" src="./js/bootstrap.js"></script> 
+<script type="text/javascript" src="./js/kiva.js"></script>      
 </head>
 <body >
 <div class="container">
@@ -133,15 +32,34 @@ jQuery.getJSON("jsonloans.json", null, receiveKBFile);
             		Sector: <input type="text" id="searchSectorBox" onkeyup="performSearch();" style="width:125px;"><br>
             		Activity: <input type="text" id="searchActivityBox" onkeyup="performSearch();" style="width:125px;"><br>
 				</span>
+			</br>
+				<a class="btn" id="clearSearchBtn" href="#">Clear</a> <a class="btn btn-primary" id="saveFilterBtn" href="#">Save Filter</a>
 			</div>
 			<div class="pB">
 				<h3 class=""><span class=""></span><a href="/#">Saved Filters</a></h3>
 				<div class="">
-					<p>Add ability to save search filters</p>
+				</br>
+					<ul class="nav nav-tabs nav-stacked" style="font-size:smaller;">
+						<li>
+   							 <a href="#" id="filterBtn1" class="filterBtn"></a>
+  						</li>
+  						<li>
+   							 <a href="#" id="filterBtn2" class="filterBtn"></a>
+  						</li>
+  						<li>
+   							 <a href="#" id="filterBtn3" class="filterBtn"></a>
+  						</li>
+  						<li>
+   							 <a href="#" id="filterBtn4" class="filterBtn"></a>
+  						</li>
+  						<li>
+   							 <a href="#" id="filterBtn5" class="filterBtn"></a>
+  						</li>
+					</ul>
 				</div>
 			</div>
 			<div class="pB">
-					<h3 class=""><span class=""></span><a href="/#">Achievements</a></h3>
+					<h3 class=""><span class=""></span><a href="./achievements.html">Achievements</a></h3>
 					<div class=""  >
 						<p>Would be great to have a feature achievement</p>
 						<ul>
