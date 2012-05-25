@@ -6,24 +6,21 @@ Kiva is a charitable organization and microfinance platform for making micro loa
 Kivabeta
 --------
 
-Kivabeta is a project that adds new and more powerful searching and lending features on top of the Kiva API. It is modeled after the great work done by Paul Ericksen on KivaLens (http://kivalens.org) however that was done in Silverlight and this is done in pure HTML/Javascript.
+Kivabeta is a project that adds new and more powerful searching and lending features on top of the Kiva API. 
 
 Installation
 -------------
-Clone this repository into a web-accessible directory that supports HTML and javascript. Then navigate to that directory (e.g., http://localhost/kivabank/index.html )
+Clone this repository into a web-accessible directory that supports HTML and javascript. Then navigate to that directory (e.g., http://localhost/kivabeta/index.html )
 
 How does this help Kiva
 -----------------------
 
-Kiva has many requests for new features that would make lending on the site easier or more engaging. Unfortunately, we don't often have time to implement such features. Also, unfortunately, we don't have much of our code open-sourced yet. This leaves us unable to enable people to help us in the ways they would like to (and that we would love). Kivabeta gives us a chance to put some code out there that can go live at kivabank.org/lite and if it proves useful, can be merged back into our code base. In addition to making the site better, this should help us work towards open sourcing more of our code.
+Kiva has many requests for new features that would make lending on the site easier or more engaging. Unfortunately, we don't often have time to implement such features. Also, unfortunately, we don't have much of our code open-sourced yet. This leaves us unable to enable people to help us in the ways they would like to  Kivabeta gives us a chance to put some code out there that can go on Github and then on the Kiva site if it proves useful, can be merged back into our code base. In addition to making the site better, this should help us work towards open sourcing more of our code.
 
 Kiva engineers highly appreciate all the help. For more information on working with the Kiva API for your own projects, check out http://build.kiva.org 
 
 Contributors
 ------------
-
-Kiva Beta is based off of work by Paul Ericksen (http://kiva.org/lender/nuclearspike)
-
-Further work done by Kevin O'Brien at Kiva (http://kiva.org/lender/penguinsforthewin)
+Kiva Beta is an initiative by Kevin O'Brien at Kiva (http://kiva.org/lender/penguinsforthewin) along with http://giving.github.com
 
 Contribute and we'll add your name here as well
