@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+   	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+	<meta name="keywords" content="kiva, microfinance, microcredit, microloan, microlending, loan, africa, business, philanthropy, international development, projects, corporate giving, corporate philanthropy, donors, donating, donation, charity, social development, economic development, grassroots development, employee giving, poverty alleviation, economic investments, social investment, entrepreneur, entrepreneurs, social entrepreneurship, innovation, giving, give, gift, gifts" />
+	<meta name="description" content="Make a loan to an entrepreneur across the globe for as little as $25. Kiva is the world's first online lending platform connecting online lenders to entrepreneurs across the globe." />
+	<meta property="og:image" content="http://l3-1.kiva.org/img/logo/kiva.png" />
+   	<meta property="og:site_name" content="Kiva" />
+	<link rel="shortcut icon" href="http://l3-1.kiva.org/img/favicon.ico" />
+	<link rel="apple-touch-icon" href="http://l3-1.kiva.org/img/apple-touch-icon.png" />
+	<link rel="stylesheet" href="http://l3-1.kiva.org/StyleSheets/kiva.supercat.css" />
+	<link rel="stylesheet" href="http://l3-1.kiva.org/views/Lend/ListingMapSubView.min.css" />
+	<link rel="stylesheet" href="http://l3-1.kiva.org/css/flags16.min.css" />
+	<link rel="stylesheet" href="http://l3-1.kiva.org/js/jquery-ui/css/jquery-ui-1.8.13.chai.min.css" />
+	<link rel="stylesheet" href="http://l3-1.kiva.org/views/Lend/Lend.min.css" />
+	<link rel="stylesheet" href="http://l3-2.kiva.org/views/Loan/LoanCardsSubView.min.css" />
+	<link rel="stylesheet" href="http://l3-2.kiva.org/views/Loan/LoanStatusSubView.min.css" />
+			
+	<!--[if lt IE 8 ]>
+		<link rel="stylesheet" href="http://l3-1.kiva.org/css/chai/ie7.min.css" />
+	<![endif]-->
+
+	
+	<title>Kiva - Loans that change lives</title>
+
+		<script>
+		var kv ={
+			__start: (new Date()).getTime()
+			, rootHttp: 'http://www.kiva.org/'
+			, staticRootHttp: 'http://l3-1.kiva.org/'
+        	, streamHost: 'streams.kiva.org'
+        	, streamPort: '8000'
+        	, streamEnabled: true
+			, getScriptName: function (path) {
+				var scriptName = path.slice(path.lastIndexOf('/') + 1);
+
+				if (scriptName.indexOf('.min.js') !== -1) {
+					return scriptName.slice(0, scriptName.indexOf('.min.js'));
+				}
+
+				return scriptName.slice(0, scriptName.indexOf('.js'));
+			}
+        };
+	</script>
+
+	<script src="http://l3-1.kiva.org/js/sc/head.supercat.js"></script>
+</head>
+<body id="lend" class="businesses businesses_businesses">
+	<div class="wrap">
+		<div id="tipMsg" class="tipMsg " style="display: none;">
+			<div class="container g12">
+				<div class="tipMsgClose">x</div>
+				<ul class="tipMsgContent big"></ul>
+			</div>
+		</div>
+		<noscript><div class="noscriptWarning">KivaBeta requires JavaScript to be enabled</div></noscript>
+		<header id="siteHeader" class="siteHeader ">
+			<div class="container g12">
+				<h1 id="kivaLogo" class="kivaLogo">
+					<a href="http://www.kiva.org/" title="Kiva" data-kv-trackevent='logo_click_to=home'>
+						<img src="http://l3-1.kiva.org/img/logo/kiva.png" alt="Kiva Logo" title="Kiva Homepage" width="121" height="64" />
+						Kiva
+					</a>
+				</h1>
+
+				<nav id="siteNav" class="siteNav">
+					<ul>
+						<li id="siteNavPortfolio" ><a href="https://www.kiva.org/portfolio">My Portfolio</a></li>
+						<li id="siteNavUpdates" ><a href="http://www.kiva.org/updates">Updates</a></li>
+						<li id="siteNavCommunity" ><a href="http://www.kiva.org/community">Community</a></li>
+						<li id="siteNavAbout" ><a href="http://www.kiva.org/about">About</a></li>
+						<li id="siteNavLend"  class="urHere"><a href="http://www.kiva.org/lend">Lend</a></li>
+					</ul>
+				</nav>
+				<ul id="utilLinks">
+					<li class="giftsLink"><a href="http://www.kiva.org/gifts/kiva-cards">Gifts</a></li>
+					<li class="loginLink"><a href="https://www.kiva.org/login">Login</a></li>
+					<li class="loginLink"><a href="https://www.kiva.org/register">Register</a></li>
+					<li class="basketLink" id="basketNav">
+						<a href="http://www.kiva.org/basket">My Basket</a>
+						<span id="basketCount"  class="dN">0</span>
+					</li>
+				</ul>
+			</div>
+		</header>
+
+		<div class="mainWrapper container">
+			<div id="main" class="main">
+				<script>
+					var Lend_ListingView = {"show_advanced_options":null,"isFreeTrialUser":false,"max_partner_values":{"default_rate":"8","arrears_rate":"10","risk_rating":"5.0"},"results":{},"sp_strengths":{"1":{"name":"Anti-Poverty Focus","key":"antipoverty","includeView":"SocialAntipovertyView","mcHelpTerm":"SPSantipoverty","spStrengthId":1},"2":{"name":"Vulnerable Group Focus","key":"vulnerablegroup","includeView":"SocialVulnerableGroupView","mcHelpTerm":"SPSvulnerablegroup","spStrengthId":2},"3":{"name":"Client Voice","key":"clientvoice","includeView":"SocialClientVoiceView","mcHelpTerm":"SPSclientvoice","spStrengthId":3},"4":{"name":"Family & Community","key":"familyandcommunity","includeView":"SocialFamilyAndCommunityView","mcHelpTerm":"SPSfamilyandcommunity","spStrengthId":4},"5":{"name":"Entrepreneurial Support","key":"entrepreneurial","includeView":"SocialEntrepreneurialView","mcHelpTerm":"SPSentrepreneurial","spStrengthId":5},"6":{"name":"Facilitation of Savings","key":"facilitatesavings","includeView":"SocialFacilitateSavingsView","mcHelpTerm":"SPSfacilitatesavings","spStrengthId":6},"7":{"name":"Innovation","key":"innovation","includeView":"SocialInnovationView","mcHelpTerm":"SPSinnovation","spStrengthId":7}},"lend_tab_map_list_view":true};
+				</script>
+
+				<header class="lendHeader g12 pLR">
+    				<h2>Choose a Borrower<span class="selected"></span></h2>
+					<div id="resultStatus">
+						<span id="resultsNumber" class="number"></span>&nbsp;<span id="resultsText"></span>
+					</div>
+				</header>		
+				<div class="b rCB bS g12">
+					<form id="listingsForm" class="boxCap">
+						<input type="search" id="queryString" name="queryString" value="" size="30" onkeypress="retval=kv.disableKeys(event, 13);if (retval == false) onChangeQueryString(); return retval;" placeholder="Search borrowers"/>
+						<button type="button" id="findLoanButton">Search</button>
+						<button type="button" id="chooseForMeButton">Choose for me</button>
+						<a href="http://www.kiva.org/lend" class="reset big"><span class="smaller">Clear filters</span></a>
+						<label>Sort by:
+							<select id="sortBy" name="sortBy" onchange="onChangeSortBy();">
+								<option label="Random" value="random">Random</option>
+								<option label="Popularity" value="popularity" selected="selected">Popularity</option>
+								<option label="Loan Amount" value="loanAmount">Loan Amount</option>
+								<option label="Amount Left" value="amountLeft">Amount Left</option>
+								<option label="Repayment Term" value="repaymentTerm">Repayment Term</option>
+								<option label="Expiring Soon" value="expiringSoon">Expiring Soon</option>
+								<option label="Most Recent" value="newest">Most Recent</option>
+							</select>
+						</label>
+					</form>
+					<aside id="lend-tab-filters" class="g3 a">
+					<div id="low-inventory-help" class="notice b pT">
+						Hurry, there aren't many loans left!
+						<a href="http://www.kiva.org/ajax/mc/glossary/low_inventory" class="helpTip mcHelpTip">Why are there so few loans available?</a>
+					</div>
+					<form id="listingFiltersForm" class="listingFiltersForm" action="http://www.kiva.org/lend" method="GET">
+						<input id="pageID" type="hidden" value="" />
+						<input id="perPage" type="hidden" value="" />
+
+						<fieldset id="gender_div">
+							<h3>Gender</h3>
+							<label>
+								<input type="checkbox" name="gender[]" value="Male" />
+								<div class="value">Male</div><div class="facet"></div>
+							</label>
+							<label>
+								<input type="checkbox" name="gender[]" value="Female" />
+								<div class="value">Female</div><div class="facet"></div></label>
+						</fieldset>
+			
+						<fieldset id="sectors_div">
+							<h3>Sector</h3>
+							<label><input type="checkbox" name="sectors[]" value="1" /><div class="value">Agriculture</div><div class="facet"></div></label>
+							<label><input type="checkbox" name="sectors[]" value="9" /><div class="value">Arts</div><div class="facet"></div></label>
+							<label><input type="checkbox" name="sectors[]" value="5" /><div class="value">Clothing</div><div class="facet"></div></label>
+							<label><input type="checkbox" name="sectors[]" value="14" /><div class="value">Construction</div><div class="facet"></div></label>
+							<label><input type="checkbox" name="sectors[]" value="15" /><div class="value">Education</div><div class="facet"></div></label>
+							<label><input type="checkbox" name="sectors[]" value="17" /><div class="value">Entertainment</div><div class="facet"></div></label>
+							<label><input type="checkbox" name="sectors[]" value="12" /><div class="value">Food</div><div class="facet"></div></label>
+							<label><input type="checkbox" name="sectors[]" value="6" /><div class="value">Health</div><div class="facet"></div></label>
+							<label><input type="checkbox" name="sectors[]" value="10" /><div class="value">Housing</div><div class="facet"></div></label>
+							<label><input type="checkbox" name="sectors[]" value="8" /><div class="value">Manufacturing</div><div class="facet"></div></label>
+							<label><input type="checkbox" name="sectors[]" value="16" /><div class="value">Personal Use</div><div class="facet"></div></label>
+							<label><input type="checkbox" name="sectors[]" value="7" /><div class="value">Retail</div><div class="facet"></div></label>
+							<label><input type="checkbox" name="sectors[]" value="4" /><div class="value">Services</div><div class="facet"></div></label>
+							<label><input type="checkbox" name="sectors[]" value="3" /><div class="value">Transportation</div><div class="facet"></div></label>
+							<label><input type="checkbox" name="sectors[]" value="13" /><div class="value">Wholesale</div><div class="facet"></div></label>
+						</fieldset>
+            			<fieldset id="borrower_type_div">
+			                <h3>Groups or Individual</h3>
+							<label><input type="checkbox" name="borrower_type[]" value="Groups" /><div class="value">Groups</div><div class="facet"></div></label>
+							<label><input type="checkbox" name="borrower_type[]" value="Individuals" /><div class="value">Individuals</div><div class="facet"></div></label>
+			            </fieldset>
+			            <fieldset id="themes_div">
+            			    <h3>Attributes</h3>
+			                <label><input type="checkbox" name="themes[]" value="Green" /><div class="value">Green</div><div class="facet"></div></label>
+							<label><input type="checkbox" name="themes[]" value="Higher Education" /><div class="value">Higher Education</div><div class="facet"></div></label>
+							<label><input type="checkbox" name="themes[]" value="Arab Youth" /><div class="value">Arab Youth</div><div class="facet"></div></label>
+							<label><input type="checkbox" name="themes[]" value="Kiva City LA" /><div class="value">Kiva City LA</div><div class="facet"></div></label>
+							<label><input type="checkbox" name="themes[]" value="Islamic Finance" /><div class="value">Islamic Finance</div><div class="facet"></div></label>
+							<label><input type="checkbox" name="themes[]" value="Youth" /><div class="value">Youth</div><div class="facet"></div></label>
+							<label><input type="checkbox" name="themes[]" value="Start-Up" /><div class="value">Start-Up</div><div class="facet"></div></label>
+							<label><input type="checkbox" name="themes[]" value="Water and Sanitation" /><div class="value">Water and Sanitation</div><div class="facet"></div></label>
+							<label><input type="checkbox" name="themes[]" value="Vulnerable Groups" /><div class="value">Vulnerable Groups</div><div class="facet"></div></label>
+							<label><input type="checkbox" name="themes[]" value="Fair Trade" /><div class="value">Fair Trade</div><div class="facet"></div></label>
+							<label><input type="checkbox" name="themes[]" value="Rural Exclusion" /><div class="value">Rural Exclusion</div><div class="facet"></div></label>
+							<label><input type="checkbox" name="themes[]" value="Mobile Technology" /><div class="value">Mobile Technology</div><div class="facet"></div></label>
+			            </fieldset>
+						<fieldset id="status_div">
+							<h3>Status</h3>
+							<div class="fL">
+								<select name="status" id="status" class="lend-dropdown">
+									<option label="Fundraising" value="fundRaising" selected="selected">Fundraising</option>
+									<option label="Fully Funded" value="raised">Fully Funded</option>
+									<option label="Paying Back" value="payingBack">Paying Back</option>
+									<option label="Paid Back" value="ended">Paid Back</option>
+									<option label="Ended with Loss" value="ended_with_loss">Ended with Loss</option>
+									<option label="All" value="All">All</option>
+								</select>
+							</div>
+						</fieldset>
+						<fieldset id="advance_options">
+							<a href="#" class="advanced-link button">Advanced Options</a>
+						</fieldset>
+						<div id="advanced_options_div" class="dN">
+							<div id="adv_partner_options">
+								<fieldset>
+									<h3>Partner Details</h3>
+									<div class="small">
+										<p>Kiva administers loans through field partners. Each field partner has unique social performance strengths and risk attributes. The filters below can help you to choose a loan based on these attributes.</p>
+									</div>
+									<div class="fL">
+										<select name="partners_select" id="partners_select" class="partners_select mT" size="4" multiple>
+											<option label="All" value="All" selected="selected">All</option>
+											<option label="ACCION Texas Inc." value="173">ACCION Texas Inc.</option>
+											<option label="ACCION USA" value="131">ACCION USA</option>
+											<option label="ACEP Cameroun" value="217">ACEP Cameroun</option>
+											<option label="ADIM (Asociación Alternativa Para el Desarrollo Integral de las Mujeres)" value="120">ADIM (Asociación Alternativa Para el Desarrollo Integral de las Mujeres)</option>
+											<option label="AFODENIC" value="98">AFODENIC</option>
+											<option label="Agro Capital Management LLC" value="227">Agro Capital Management LLC</option>
+											<option label="Al Majmoua Lebanese Association for Development" value="77">Al Majmoua Lebanese Association for Development</option>
+											<option label="Al-Amal Microfinance Bank" value="205">Al-Amal Microfinance Bank</option>
+											<option label="Alalay sa Kaunlaran, Inc. (ASKI)" value="123">Alalay sa Kaunlaran, Inc. (ASKI)</option>
+											<option label="Alidé" value="104">Alidé</option>
+											<option label="Amasezerano Community Banking S.A." value="170">Amasezerano Community Banking S.A.</option>
+											<option label="Ameen s.a.l." value="115">Ameen s.a.l.</option>
+											<option label="Apoyo Integral" value="81">Apoyo Integral</option>
+											<option label="Aqroinvest Credit Union" value="56">Aqroinvest Credit Union</option>
+											<option label="Asasah, a partner of Save the Children" value="60">Asasah, a partner of Save the Children</option>
+											<option label="ASI Federal Credit Union" value="200">ASI Federal Credit Union</option>
+											<option label="Asociación Arariwa" value="119">Asociación Arariwa</option>
+											<option label="Asociación ASDIR" value="113">Asociación ASDIR</option>
+											<option label="ASPIRE" value="220">ASPIRE</option>
+											<option label="Association for Rural Development (ARD)" value="148">Association for Rural Development (ARD)</option>
+											<option label="Bai Tushum &amp; Partners" value="171">Bai Tushum &amp; Partners</option>
+											<option label="Banco D-MIRO S.A." value="147">Banco D-MIRO S.A.</option>
+											<option label="Barefoot Power" value="212">Barefoot Power</option>
+											<option label="BRAC Liberia Microfinance Company Limited" value="182">BRAC Liberia Microfinance Company Limited</option>
+											<option label="BRAC Sierra Leone Microfinance Company Limited" value="183">BRAC Sierra Leone Microfinance Company Limited</option>
+											<option label="BRAC South Sudan" value="107">BRAC South Sudan</option>
+											<option label="BRAC Uganda" value="65">BRAC Uganda</option>
+											<option label="Caja Rural Señor de Luren" value="139">Caja Rural Señor de Luren</option>
+											<option label="Capital Aid Fund for Employment of the Poor (CEP)" value="172">Capital Aid Fund for Employment of the Poor (CEP)</option>
+											<option label="CAURIE Microfinance, a partner of Catholic Relief Services" value="105">CAURIE Microfinance, a partner of Catholic Relief Services</option>
+											<option label="Center for Community Transformation Credit Cooperative (CCT)" value="144">Center for Community Transformation Credit Cooperative (CCT)</option>
+											<option label="CEPRODEL" value="74">CEPRODEL</option>
+											<option label="CHF International Access to Credit Services Initiatives (ACSI) Iraq" value="166">CHF International Access to Credit Services Initiatives (ACSI) Iraq</option>
+											<option label="Christian Rural Aid Network (CRAN)" value="91">Christian Rural Aid Network (CRAN)</option>
+											<option label="CIDRE" value="140">CIDRE</option>
+											<option label="Community Economic Ventures, Inc. (CEVI), a partner of VisionFund International" value="125">Community Economic Ventures, Inc. (CEVI), a partner of VisionFund International</option>
+											<option label="Cooperativa San Jose" value="159">Cooperativa San Jose</option>
+											<option label="Credit Mongol" value="42">Credit Mongol</option>
+											<option label="Credituyo" value="18">Credituyo</option>
+											<option label="EDAPROSPO" value="93">EDAPROSPO</option>
+											<option label="EDESA" value="127">EDESA</option>
+											<option label="Edpyme Alternativa" value="143">Edpyme Alternativa</option>
+											<option label="Emprender" value="110">Emprender</option>
+											<option label="Esperanza International Dominican Republic, a partner of HOPE International" value="44">Esperanza International Dominican Republic, a partner of HOPE International</option>
+											<option label="FAMA OPDF" value="168">FAMA OPDF</option>
+											<option label="FAPE" value="97">FAPE</option>
+											<option label="Faulu Kenya" value="142">Faulu Kenya</option>
+											<option label="Finadev Benin" value="179">Finadev Benin</option>
+											<option label="Finance (SS) Ltd." value="206">Finance (SS) Ltd.</option>
+											<option label="FINCA Peru" value="70">FINCA Peru</option>
+											<option label="FODEMI, a partner of World Vision International" value="188">FODEMI, a partner of World Vision International</option>
+											<option label="Fondo Esperanza" value="157">Fondo Esperanza</option>
+											<option label="Friendship Bridge" value="55">Friendship Bridge</option>
+											<option label="FUDECOSUR" value="150">FUDECOSUR</option>
+											<option label="Fund for Thanh Hoa Poor Women (FPW), a partner of Save the Children" value="121">Fund for Thanh Hoa Poor Women (FPW), a partner of Save the Children</option>
+											<option label="Fundacion Alternativa" value="190">Fundacion Alternativa</option>
+											<option label="Fundacion Campo" value="199">Fundacion Campo</option>
+											<option label="Fundación ESPOIR" value="137">Fundación ESPOIR</option>
+											<option label="Fundación León 2000" value="96">Fundación León 2000</option>
+											<option label="Fundación Mario Santo Domingo (FMSD)" value="154">Fundación Mario Santo Domingo (FMSD)</option>
+											<option label="Fundacion Mujer" value="151">Fundacion Mujer</option>
+											<option label="Fundación Paraguaya" value="58">Fundación Paraguaya</option>
+											<option label="Fundacion Realidad A.C (FRAC), a partner of World Vision International" value="130">Fundacion Realidad A.C (FRAC), a partner of World Vision International</option>
+											<option label="Gata Daku Multi-purpose Cooperative (GDMPC)" value="136">Gata Daku Multi-purpose Cooperative (GDMPC)</option>
+											<option label="Grameen America" value="186">Grameen America</option>
+											<option label="Grounded and Holistic Approach for People's Empowerment (GHAPE)" value="40">Grounded and Holistic Approach for People's Empowerment (GHAPE)</option>
+											<option label="Hagdan sa Pag-uswag Foundation, Inc. (HSPFI)" value="128">Hagdan sa Pag-uswag Foundation, Inc. (HSPFI)</option>
+											<option label="Hattha Kaksekar Limited (HKL), a partner of Save the Children" value="106">Hattha Kaksekar Limited (HKL), a partner of Save the Children</option>
+											<option label="Hekima, a partner of World Relief" value="160">Hekima, a partner of World Relief</option>
+											<option label="Hluvuku-Adsema" value="23">Hluvuku-Adsema</option>
+											<option label="HOFOKAM Ltd., a partner of Catholic Relief Services" value="163">HOFOKAM Ltd., a partner of Catholic Relief Services</option>
+											<option label="HOPE Congo S.A." value="165">HOPE Congo S.A.</option>
+											<option label="HOPE DRC, a partner of HOPE International" value="46">HOPE DRC, a partner of HOPE International</option>
+											<option label="HOPE Ukraine, a partner of HOPE International" value="26">HOPE Ukraine, a partner of HOPE International</option>
+											<option label="ID Ghana" value="231">ID Ghana</option>
+											<option label="IMON International" value="100">IMON International</option>
+											<option label="IMPRO" value="48">IMPRO</option>
+											<option label="Interactuar" value="177">Interactuar</option>
+											<option label="Juhudi Kilimo (JK)" value="156">Juhudi Kilimo (JK)</option>
+											<option label="Kashf Foundation" value="245">Kashf Foundation</option>
+											<option label="Kenya Agency for Development of Enterprise and Technology (KADET), a partner of World Vision International" value="133">Kenya Agency for Development of Enterprise and Technology (KADET), a partner of World Vision International</option>
+											<option label="Komak Credit Union" value="30">Komak Credit Union</option>
+											<option label="Koperasi  Mitra Usaha Kecil (MUK)" value="82">Koperasi  Mitra Usaha Kecil (MUK)</option>
+											<option label="Koret Israel Economic Development Funds (KIEDF)" value="175">Koret Israel Economic Development Funds (KIEDF)</option>
+											<option label="KosInvest" value="240">KosInvest</option>
+											<option label="KREDIT Ltd." value="9">KREDIT Ltd.</option>
+											<option label="LLC Micro Finance Organization Credo" value="181">LLC Micro Finance Organization Credo</option>
+											<option label="Maharishi Education for Invincibility Trust" value="211">Maharishi Education for Invincibility Trust</option>
+											<option label="Manuela Ramos / CrediMUJER" value="72">Manuela Ramos / CrediMUJER</option>
+											<option label="MAXIMA Mikroheranhvatho Co., Ltd." value="61">MAXIMA Mikroheranhvatho Co., Ltd.</option>
+											<option label="Maya" value="198">Maya</option>
+											<option label="Mbinga Community Bank" value="208">Mbinga Community Bank</option>
+											<option label="MDO Arvand, LLC" value="215">MDO Arvand, LLC</option>
+											<option label="MiCredito" value="176">MiCredito</option>
+											<option label="Micro Credit for Development and Transformation SACCO (MCDT SACCO)" value="112">Micro Credit for Development and Transformation SACCO (MCDT SACCO)</option>
+											<option label="Micro Start/AFD" value="187">Micro Start/AFD</option>
+											<option label="Microfinanzas Prisma" value="71">Microfinanzas Prisma</option>
+											<option label="MicroKing Savings and Credit Company (MKF)" value="184">MicroKing Savings and Credit Company (MKF)</option>
+											<option label="Milango Financial Services" value="203">Milango Financial Services</option>
+											<option label="MLO Humo and Partners" value="63">MLO Humo and Partners</option>
+											<option label="Mobile Transactions (MTZ)" value="210">Mobile Transactions (MTZ)</option>
+											<option label="National Microfinance Bank" value="185">National Microfinance Bank</option>
+											<option label="Negros Women for Tomorrow Foundation, Inc. (NWTF)" value="145">Negros Women for Tomorrow Foundation, Inc. (NWTF)</option>
+											<option label="Nor Horizon Universal Credit Organization Limited Liability Company" value="146">Nor Horizon Universal Credit Organization Limited Liability Company</option>
+											<option label="Novica" value="225">Novica</option>
+											<option label="One Acre Fund" value="202">One Acre Fund</option>
+											<option label="Opportunity Fund" value="132">Opportunity Fund</option>
+											<option label="Organizacion de Desarollo Empresarial Femenino (ODEF)" value="201">Organizacion de Desarollo Empresarial Femenino (ODEF)</option>
+											<option label="PADECOMSM" value="167">PADECOMSM</option>
+											<option label="Paglaum Multi-Purpose Cooperative (PMPC)" value="126">Paglaum Multi-Purpose Cooperative (PMPC)</option>
+											<option label="Palestine for Credit &amp; Development (FATEN)" value="80">Palestine for Credit &amp; Development (FATEN)</option>
+											<option label="Patan Business and Professional Women" value="62">Patan Business and Professional Women</option>
+											<option label="Pearl Microfinance Limited" value="84">Pearl Microfinance Limited</option>
+											<option label="Prisma Honduras, S.A." value="118">Prisma Honduras, S.A.</option>
+											<option label="Pro Mujer Bolivia" value="59">Pro Mujer Bolivia</option>
+											<option label="PT Rekan Usaha Mikro Anda (Ruma)" value="219">PT Rekan Usaha Mikro Anda (Ruma)</option>
+											<option label="Relief International Microfinance Iraq" value="216">Relief International Microfinance Iraq</option>
+											<option label="Ryada, a partner of CHF International" value="122">Ryada, a partner of CHF International</option>
+											<option label="Salone Microfinance Trust (SMT), a partner of ChildFund International" value="57">Salone Microfinance Trust (SMT), a partner of ChildFund International</option>
+											<option label="SEDA" value="85">SEDA</option>
+											<option label="SEF International UCO LLC, a partner of World Vision International" value="169">SEF International UCO LLC, a partner of World Vision International</option>
+											<option label="Sinapi Aba Trust (SAT)" value="88">Sinapi Aba Trust (SAT)</option>
+											<option label="Sistema Biobolsa" value="226">Sistema Biobolsa</option>
+											<option label="SMEP Deposit Taking Microfinance Limited" value="138">SMEP Deposit Taking Microfinance Limited</option>
+											<option label="Soro Yiriwaso, a partner of Save the Children" value="78">Soro Yiriwaso, a partner of Save the Children</option>
+											<option label="South Pacific Business Development (SPBD)" value="15">South Pacific Business Development (SPBD)</option>
+											<option label="Strathmore University" value="218">Strathmore University</option>
+											<option label="Tamweelcom" value="174">Tamweelcom</option>
+											<option label="Tanaoba Lais Manekat Foundation (TLM)" value="129">Tanaoba Lais Manekat Foundation (TLM)</option>
+											<option label="Transcapital" value="180">Transcapital</option>
+											<option label="Tuba Rai Metin" value="243">Tuba Rai Metin</option>
+											<option label="Tujijenge Tanzania Ltd" value="87">Tujijenge Tanzania Ltd</option>
+											<option label="Turame Community Finance, a partner of World Relief and HOPE International" value="162">Turame Community Finance, a partner of World Relief and HOPE International</option>
+											<option label="UGAFODE Microfinance Limited" value="222">UGAFODE Microfinance Limited</option>
+											<option label="UIMCEC, a partner of ChildFund International" value="108">UIMCEC, a partner of ChildFund International</option>
+											<option label="Union Regional de Huatusco" value="224">Union Regional de Huatusco</option>
+											<option label="Urwego Opportunity Bank of Rwanda (UOB), a partner of World Relief, HOPE International, and Opportunity International" value="161">Urwego Opportunity Bank of Rwanda (UOB), a partner of World Relief, HOPE International, and Opportunity International</option>
+											<option label="Valley Economic Development Center, Inc." value="228">Valley Economic Development Center, Inc.</option>
+											<option label="Vision Finance Company s.a. (VFC), a partner of World Vision International" value="117">Vision Finance Company s.a. (VFC), a partner of World Vision International</option>
+											<option label="VisionFund Albania" value="239">VisionFund Albania</option>
+											<option label="VisionFund AzerCredit LLC" value="207">VisionFund AzerCredit LLC</option>
+											<option label="VisionFund Cambodia" value="204">VisionFund Cambodia</option>
+											<option label="VisionFund Indonesia" value="189">VisionFund Indonesia</option>
+											<option label="Women and Associations for Gain both Economic and Social (WAGES)" value="111">Women and Associations for Gain both Economic and Social (WAGES)</option>
+											<option label="XacBank" value="116">XacBank</option>
+											<option label="Yehu Microfinance Trust" value="164">Yehu Microfinance Trust</option>
+											
+										</select>
+									</div>
+								</fieldset>
+											
+								<fieldset id="spFiltersFieldset" class="pT">
+									<div>
+										<a href="http://www.kiva.org/ajax/mc/glossary/SocialPerformanceStrengths" class="helpTip mcHelpTip">Social Performance</a>
+										<div class="smallest gray matchAll">All are matched</div>
+									</div>
+ 									<label>
+										<input type="checkbox" name="antipoverty" id="antipoverty" />
+										<a href="http://www.kiva.org/ajax/mc/glossary/SPSantipoverty" class="helpTip mcHelpTip">Anti-Poverty Focus</a>
+									</label>
+									<label>
+										<input type="checkbox" name="vulnerablegroup" id="vulnerablegroup" />
+										<a href="http://www.kiva.org/ajax/mc/glossary/SPSvulnerablegroup" class="helpTip mcHelpTip">Vulnerable Group Focus</a>
+									</label>
+									<label>
+										<input type="checkbox" name="clientvoice" id="clientvoice" />
+										<a href="http://www.kiva.org/ajax/mc/glossary/SPSclientvoice" class="helpTip mcHelpTip">Client Voice</a>
+									</label>
+									<label>
+										<input type="checkbox" name="familyandcommunity" id="familyandcommunity" />
+										<a href="http://www.kiva.org/ajax/mc/glossary/SPSfamilyandcommunity" class="helpTip mcHelpTip">Family & Community</a>
+									</label>
+									<label>
+										<input type="checkbox" name="entrepreneurial" id="entrepreneurial" />
+										<a href="http://www.kiva.org/ajax/mc/glossary/SPSentrepreneurial" class="helpTip mcHelpTip">Entrepreneurial Support</a>
+									</label>
+									<label>
+										<input type="checkbox" name="facilitatesavings" id="facilitatesavings" />
+										<a href="http://www.kiva.org/ajax/mc/glossary/SPSfacilitatesavings" class="helpTip mcHelpTip">Facilitation of Savings</a>
+									</label>
+									<label>
+										<input type="checkbox" name="innovation" id="innovation" />
+										<a href="http://www.kiva.org/ajax/mc/glossary/SPSinnovation" class="helpTip mcHelpTip">Innovation</a>
+									</label>
+								</fieldset>
+								<fieldset class="pT">
+									<!-- leaving out advanced filters for now -->
+								</fieldset>
+							</div>
+						</div>
+					</form>
+				</aside>
+
+				<div id="listingsCol" class="g9 bL pL z">
+					<nav class="kvPager listingsPager kvPagerAlign-right">
+						<!-- leaving out pager for now -->
+					</nav>
+
+					<ul class="loanCards listing stack cF">								
+						<li>
+							<article class="loanCard listing  borrowerQuickLook" id="biz_row_448193">
+							<div class="pic g3 a">
+								<a  href="http://www.kiva.org/lend/448193" class="img img-s200 img img-w200h200" data-kv-trackevent="" ><img  src="http://s3-2.kiva.org/img/s200/1136561.jpg" alt="Oñondivepa Group" title="Oñondivepa Group" width="200" height="200" /></a>
+							</div>
+							<div class="desc g4">
+								<h1><a href="http://www.kiva.org/lend/448193">Oñondivepa Group</a></h1>
+								<div class="borrowerCount">14 Borrowers</div>
+								<div class="country_sector">
+									<span class="f16 py"></span>
+									<span class="bold">Paraguay</span> | Green | Retail | Recycled Materials
+								</div>
+								<div class="loanDescription">
+									<p class='loanExcerpt'>A portion of Oñondivepa Group's $3,150 loan helps a member to buy cardboard, plastic, and other materials.</p>
+									<a class="small" href="http://www.kiva.org/lend/448193">Read their story&nbsp;&gt;</a>
+								</div>
+								<div class="mfi">Funding via Fundación Paraguaya</div>
+							</div>
+							<div class="details g2 z">
+								<div class="loanStatusSubView">
+    							    <div id="448193_amount_raised" class="percentRaised fundRaising ">
+								        <span id="448193_percent_paid" class="number">50%</span> raised
+									 </div>
+									<div class="fundRaisingMeter meter">
+									<div id="448193_bar"  style="width:50%"></div>
+								</div>
+								<div class="loanAmount">$225.00 <br />(per borrower)</div>
+							</div>
+							<div class="fundAction " id="funding448193">
+								<span id="span448193">
+									<a class="button actNow big" data-loan-id="448193" href="#" onclick="addToBasket('448193'); return false;">Lend $25</a>
+								</span>
+							</div>
+						</div>
+						</article>
+						</li>							
+					</ul>
+					<nav><!-- no pagination for now --></nav>
+				</div>
+			</div>
+		</div>
+		<script>window.jQuery || document.write('<script src="http://l3-2.kiva.org/js/jquery/js/jquery-1.7.1.min.js">\x3C/script>')</script>
+		<script>if (typeof window.jQuery == 'undefined') alert('There was an error loading the page. Please try again.');</script>
+		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+		<script>$.widget || document.write('<script src="http://l3-1.kiva.org/js/jquery-ui/js/jquery-ui-1.8.16.custom.min.js">\x3C/script>')</script>
+		<script src="http://l3-2.kiva.org/js/sc/chai.supercat.js"></script>
+		<script src="http://l3-1.kiva.org/views/Loan/LoanCardsSubView.min.js"></script>
+		<script src="http://l3-2.kiva.org/views/View/UtilLinksSubView.min.js"></script>
+		<!--[if lt IE 9 ]>
+			<script src="http://l3-1.kiva.org/js/sc/ie.supercat.js"></script>
+		<![endif]-->
+	</body>
+</html>
